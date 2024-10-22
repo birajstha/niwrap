@@ -7,11 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V_3D_TSTAT_METADATA = Metadata(
-<<<<<<< HEAD
     id="a4a735ff0a0504c29b4133276ff755cc4b6eaa8f.boutiques",
-=======
-    id="c32a643658b7b567543b9f6e4ca8fb1db32847da.boutiques",
->>>>>>> 6c2b6514 (fixing 3dTstat and automask)
     name="3dTstat",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
