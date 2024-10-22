@@ -1,10 +1,14 @@
 {
   "name": "3dAutomask",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "command-line": "3dAutomask [CLFRAC] [DILATE] [ERODE] [IN_FILE] [OUTPUTTYPE]",
   "author": "AFNI Developers",
 =======
   "command-line": "3dAutomask [PREFIX] [APPLY_PREFIX] [CLFRAC] [DILATE] [ERODE] [IN_FILE] [OUTPUTTYPE]",
+=======
+  "command-line": "3dAutomask [PREFIX] [APPLY_PREFIX] [CLFRAC] [DILATE] [ERODE] [OUTPUTTYPE] [IN_FILE]",
+>>>>>>> 9767cb95 (moving [IN_FILE] to the end)
   "author": "AFNI Team",
 >>>>>>> 6c2b6514 (fixing 3dTstat and automask)
   "description": "Create a brain-only mask of the image using AFNI 3dAutomask command.",
