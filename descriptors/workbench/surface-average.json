@@ -2,7 +2,7 @@
   "tool-version": "1.5.0",
   "name": "surface-average",
   "author": "Connectome Workbench Developers",
-  "command-line": "wb_command -surface-average [SURFACE_OUT] [OPT_STDDEV_STDDEV_METRIC_OUT] [OPT_UNCERTAINTY_UNCERT_METRIC_OUT] [SURF]",
+  "command-line": "wb_command -surface-average [SURFACE_OUT] [OPT_STDDEV] [STDDEV_METRIC_OUT] [OPT_UNCERTAINTY] [UNCERT_METRIC_OUT] [SURF]",
   "container-image": {
     "type": "docker",
     "image": "brainlife/connectome_workbench:1.5.0-freesurfer-update"
@@ -20,22 +20,38 @@
       "value-key": "[SURFACE_OUT]"
     },
     {
-      "id": "opt_stddev_stddev_metric_out",
-      "name": "opt_stddev_stddev_metric_out",
+      "id": "opt_stddev",
+      "name": "opt_stddev",
       "command-line-flag": "-stddev",
-      "description": "compute 3D sample standard deviation: the output metric for 3D sample standard deviation",
+      "description": "compute 3D sample standard deviation",
+      "type": "Flag",
       "optional": true,
-      "value-key": "[OPT_STDDEV_STDDEV_METRIC_OUT]",
-      "type": "String"
+      "value-key": "[OPT_STDDEV]"
     },
     {
-      "id": "opt_uncertainty_uncert_metric_out",
-      "name": "opt_uncertainty_uncert_metric_out",
+      "id": "stddev_metric_out",
+      "name": "stddev_metric_out",
+      "type": "String",
+      "description": "the output metric for 3D sample standard deviation",
+      "optional": false,
+      "value-key": "[STDDEV_METRIC_OUT]"
+    },
+    {
+      "id": "opt_uncertainty",
+      "name": "opt_uncertainty",
       "command-line-flag": "-uncertainty",
-      "description": "compute caret5 'uncertainty': the output metric for uncertainty",
+      "description": "compute caret5 'uncertainty'",
+      "type": "Flag",
       "optional": true,
-      "value-key": "[OPT_UNCERTAINTY_UNCERT_METRIC_OUT]",
-      "type": "String"
+      "value-key": "[OPT_UNCERTAINTY]"
+    },
+    {
+      "id": "uncert_metric_out",
+      "name": "uncert_metric_out",
+      "type": "String",
+      "description": "the output metric for uncertainty",
+      "optional": false,
+      "value-key": "[UNCERT_METRIC_OUT]"
     },
     {
       "id": "surf",
@@ -81,17 +97,17 @@
       "optional": false
     },
     {
-      "id": "opt_stddev_stddev_metric_out",
-      "name": "opt_stddev_stddev_metric_out",
-      "path-template": "[OPT_STDDEV_STDDEV_METRIC_OUT]",
-      "description": "compute 3D sample standard deviation: the output metric for 3D sample standard deviation",
+      "id": "stddev_metric_out",
+      "name": "stddev_metric_out",
+      "path-template": "[STDDEV_METRIC_OUT]",
+      "description": "the output metric for 3D sample standard deviation",
       "optional": false
     },
     {
-      "id": "opt_uncertainty_uncert_metric_out",
-      "name": "opt_uncertainty_uncert_metric_out",
-      "path-template": "[OPT_UNCERTAINTY_UNCERT_METRIC_OUT]",
-      "description": "compute caret5 'uncertainty': the output metric for uncertainty",
+      "id": "uncert_metric_out",
+      "name": "uncert_metric_out",
+      "path-template": "[UNCERT_METRIC_OUT]",
+      "description": "the output metric for uncertainty",
       "optional": false
     }
   ],

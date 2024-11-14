@@ -2,7 +2,7 @@
   "tool-version": "1.5.0",
   "name": "surface-distortion",
   "author": "Connectome Workbench Developers",
-  "command-line": "wb_command -surface-distortion [SURFACE_REFERENCE] [SURFACE_DISTORTED] [METRIC_OUT] [SMOOTH] [OPT_CARET5_METHOD] [OPT_EDGE_METHOD] [LOCAL_AFFINE_METHOD]",
+  "command-line": "wb_command -surface-distortion [SURFACE_REFERENCE] [SURFACE_DISTORTED] [METRIC_OUT] [SMOOTH] [OPT_CARET5_METHOD] [OPT_EDGE_METHOD] [OPT_LOCAL_AFFINE_METHOD] [OPT_LOG2]",
   "container-image": {
     "type": "docker",
     "image": "brainlife/connectome_workbench:1.5.0-freesurfer-update"
@@ -88,29 +88,22 @@
       "value-key": "[OPT_EDGE_METHOD]"
     },
     {
-      "id": "local_affine_method",
-      "name": "local_affine_method",
+      "id": "opt_local_affine_method",
+      "name": "opt_local_affine_method",
+      "command-line-flag": "-local-affine-method",
       "description": "calculate distortion by the local affines between triangles",
-      "type": {
-        "id": "local_affine_method",
-        "name": "local_affine_method",
-        "description": "calculate distortion by the local affines between triangles",
-        "command-line": "-local-affine-method [OPT_LOG2]",
-        "inputs": [
-          {
-            "id": "opt_log2",
-            "name": "opt_log2",
-            "command-line-flag": "-log2",
-            "description": "apply base-2 log transform",
-            "type": "Flag",
-            "optional": true,
-            "value-key": "[OPT_LOG2]"
-          }
-        ]
-      },
+      "type": "Flag",
       "optional": true,
-      "value-key": "[LOCAL_AFFINE_METHOD]",
-      "list": false
+      "value-key": "[OPT_LOCAL_AFFINE_METHOD]"
+    },
+    {
+      "id": "opt_log2",
+      "name": "opt_log2",
+      "command-line-flag": "-log2",
+      "description": "apply base-2 log transform",
+      "type": "Flag",
+      "optional": true,
+      "value-key": "[OPT_LOG2]"
     }
   ],
   "output-files": [

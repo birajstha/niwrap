@@ -2,7 +2,7 @@
   "tool-version": "1.5.0",
   "name": "surface-curvature",
   "author": "Connectome Workbench Developers",
-  "command-line": "wb_command -surface-curvature [SURFACE] [OPT_MEAN_MEAN_OUT] [OPT_GAUSS_GAUSS_OUT]",
+  "command-line": "wb_command -surface-curvature [SURFACE] [OPT_MEAN] [MEAN_OUT] [OPT_GAUSS] [GAUSS_OUT]",
   "container-image": {
     "type": "docker",
     "image": "brainlife/connectome_workbench:1.5.0-freesurfer-update"
@@ -20,37 +20,53 @@
       "type": "File"
     },
     {
-      "id": "opt_mean_mean_out",
-      "name": "opt_mean_mean_out",
+      "id": "opt_mean",
+      "name": "opt_mean",
       "command-line-flag": "-mean",
-      "description": "output mean curvature: mean curvature metric",
+      "description": "output mean curvature",
+      "type": "Flag",
       "optional": true,
-      "value-key": "[OPT_MEAN_MEAN_OUT]",
-      "type": "String"
+      "value-key": "[OPT_MEAN]"
     },
     {
-      "id": "opt_gauss_gauss_out",
-      "name": "opt_gauss_gauss_out",
+      "id": "mean_out",
+      "name": "mean_out",
+      "type": "String",
+      "description": "mean curvature metric",
+      "optional": false,
+      "value-key": "[MEAN_OUT]"
+    },
+    {
+      "id": "opt_gauss",
+      "name": "opt_gauss",
       "command-line-flag": "-gauss",
-      "description": "output gaussian curvature: gaussian curvature metric",
+      "description": "output gaussian curvature",
+      "type": "Flag",
       "optional": true,
-      "value-key": "[OPT_GAUSS_GAUSS_OUT]",
-      "type": "String"
+      "value-key": "[OPT_GAUSS]"
+    },
+    {
+      "id": "gauss_out",
+      "name": "gauss_out",
+      "type": "String",
+      "description": "gaussian curvature metric",
+      "optional": false,
+      "value-key": "[GAUSS_OUT]"
     }
   ],
   "output-files": [
     {
-      "id": "opt_mean_mean_out",
-      "name": "opt_mean_mean_out",
-      "path-template": "[OPT_MEAN_MEAN_OUT]",
-      "description": "output mean curvature: mean curvature metric",
+      "id": "mean_out",
+      "name": "mean_out",
+      "path-template": "[MEAN_OUT]",
+      "description": "mean curvature metric",
       "optional": false
     },
     {
-      "id": "opt_gauss_gauss_out",
-      "name": "opt_gauss_gauss_out",
-      "path-template": "[OPT_GAUSS_GAUSS_OUT]",
-      "description": "output gaussian curvature: gaussian curvature metric",
+      "id": "gauss_out",
+      "name": "gauss_out",
+      "path-template": "[GAUSS_OUT]",
+      "description": "gaussian curvature metric",
       "optional": false
     }
   ],
