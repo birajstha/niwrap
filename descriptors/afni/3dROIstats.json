@@ -1,6 +1,6 @@
 {
   "name": "3dROIstats",
-  "command-line": "3dROIstats [IN_FILE] [MASK] [OUT_FILE] [DEBUG] [FORMAT1D] [FORMAT1DR] [MASK_F2SHORT] [MASK_FILE] [NOBRIKLAB] [NOMEANOUT] [NUM_ROI] [QUIET] [ROISEL] [STAT] [ZEROFILL]",
+  "command-line": "3dROIstats [FORMAT1D] [MASK] [DEBUG] [FORMAT1DR] [MASK_F2SHORT] [MASK_FILE] [NOBRIKLAB] [NOMEANOUT] [NUM_ROI] [QUIET] [ROISEL] [STAT] [ZEROFILL] [IN_FILE] [OUT_FILE]",
   "author": "AFNI Developers",
   "description": "Display statistics over masked regions",
   "url": "https://afni.nimh.nih.gov/",
@@ -130,7 +130,18 @@
       "command-line-flag": "-zerofill",
       "description": "For roi labels not found, use the provided string instead of a '0' in the output file. only active if `num_roi` is enabled.",
       "optional": true,
-      "requires-inputs": ["num_roi"]
+      "requires-inputs": [
+        "num_roi"
+      ]
+    },
+    {
+      "id": "out_file",
+      "name": "Out file",
+      "type": "String",
+      "value-key": "[OUT_FILE]",
+      "command-line-flag": ">",
+      "description": "Output file.",
+      "optional": true
     }
   ],
   "output-files": [
@@ -139,16 +150,8 @@
       "id": "out_file",
       "optional": true,
       "description": "Output file.",
-      "path-template": "[IN_FILE]_roistat.1D",
-      "value-key": "[OUT_FILE]",
-      "command-line-flag": ">"
-    },
-    {
-      "name": "Out file",
-      "id": "out_file",
-      "path-template": "out_file",
-      "optional": true,
-      "description": "Output tab-separated values file."
+      "path-template": "[OUT_FILE]",
+      "value-key": "[OUT_FILE]"
     }
   ],
   "tool-version": "24.2.06",
