@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V__SUMA_MAKE_SPEC_CARET_METADATA = Metadata(
-    id="d6c8f4a4c9a4bdbf869e9c12beaa446f3b1adfdb.boutiques",
+    id="950a20d0f240b4840873e5b78497c9b7e5e19277.boutiques",
     name="@SUMA_Make_Spec_Caret",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -48,7 +48,6 @@ def v__suma_make_spec_caret(
     cargs = []
     cargs.append("@SUMA_Make_Spec_Caret")
     cargs.append("[OPTIONS]")
-    cargs.append("-sid")
     cargs.extend([
         "-sid",
         subject_id

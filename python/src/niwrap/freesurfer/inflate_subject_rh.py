@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 INFLATE_SUBJECT_RH_METADATA = Metadata(
-    id="bdfe097f698aa73b783059bf18d7485a5fa069bb.boutiques",
+    id="c870a2dd4beffc1dccf8c6c63c1951a8bb440f30.boutiques",
     name="inflate_subject-rh",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -44,9 +44,11 @@ def inflate_subject_rh(
     runner = runner or get_global_runner()
     execution = runner.start_execution(INFLATE_SUBJECT_RH_METADATA)
     cargs = []
-    cargs.append("inflate_subject-rh")
     if arguments is not None:
-        cargs.append(arguments)
+        cargs.extend([
+            "-rh",
+            "inflate_subject" + arguments
+        ])
     ret = InflateSubjectRhOutputs(
         root=execution.output_file("."),
     )

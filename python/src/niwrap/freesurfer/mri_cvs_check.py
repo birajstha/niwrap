@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MRI_CVS_CHECK_METADATA = Metadata(
-    id="b4193acb0a3af0c1a77ce624b0de68f1bba1fea2.boutiques",
+    id="19f10a0aa62b259f8e415446e94d3a10512ce5d1.boutiques",
     name="mri_cvs_check",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -54,12 +54,10 @@ def mri_cvs_check(
     execution = runner.start_execution(MRI_CVS_CHECK_METADATA)
     cargs = []
     cargs.append("mri_cvs_check")
-    cargs.append("--mov")
     cargs.extend([
         "--mov",
         mov_subjid
     ])
-    cargs.append("--template")
     if template_subjid is not None:
         cargs.extend([
             "--template",

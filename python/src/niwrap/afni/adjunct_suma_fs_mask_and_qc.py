@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 ADJUNCT_SUMA_FS_MASK_AND_QC_METADATA = Metadata(
-    id="9044663584933a336f19e159c18976b332d51c34.boutiques",
+    id="e333368d139aab06ce173382ee2a0cb69f091a99.boutiques",
     name="adjunct_suma_fs_mask_and_qc",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -70,10 +70,14 @@ def adjunct_suma_fs_mask_and_qc(
     execution = runner.start_execution(ADJUNCT_SUMA_FS_MASK_AND_QC_METADATA)
     cargs = []
     cargs.append("adjunct_suma_fs_mask_and_qc")
-    cargs.append("-sid")
-    cargs.append(subj_id)
-    cargs.append("-suma_dir")
-    cargs.append(suma_dir)
+    cargs.extend([
+        "-sid",
+        subj_id
+    ])
+    cargs.extend([
+        "-suma_dir",
+        suma_dir
+    ])
     if no_clean:
         cargs.append("-no_clean")
     if help_:

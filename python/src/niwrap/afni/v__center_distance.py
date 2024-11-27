@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V__CENTER_DISTANCE_METADATA = Metadata(
-    id="4b982bfe6d3c78b30fa9e3ce7498dab0a904c2d6.boutiques",
+    id="e8ff28117986ef062e78754067cfab3c33d4cd86.boutiques",
     name="@Center_Distance",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -47,8 +47,10 @@ def v__center_distance(
     execution = runner.start_execution(V__CENTER_DISTANCE_METADATA)
     cargs = []
     cargs.append("@Center_Distance")
-    cargs.append("-dset")
-    cargs.append(execution.input_file(dset1))
+    cargs.extend([
+        "-dset",
+        execution.input_file(dset1)
+    ])
     cargs.append(execution.input_file(dset2))
     ret = VCenterDistanceOutputs(
         root=execution.output_file("."),

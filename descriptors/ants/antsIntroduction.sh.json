@@ -1,6 +1,6 @@
 {
   "name": "antsIntroduction.sh",
-  "command-line": "antsIntroduction.sh -d [IMAGE_DIMENSION] -r [REFERENCE_IMAGE] -i [INPUT_IMAGE] [FORCE] [LABELS_IN_FIXED_IMAGE_SPACE] [MAX_ITERATIONS] [N4_BIAS_FIELD_CORRECTION] [OUTPREFIX] [QUALITY_CHECK] [SIMILARITY_METRIC] [TRANSFORMATION_MODEL]",
+  "command-line": "antsIntroduction.sh [IMAGE_DIMENSION] [REFERENCE_IMAGE] [INPUT_IMAGE] [FORCE] [LABELS_IN_FIXED_IMAGE_SPACE] [MAX_ITERATIONS] [N4_BIAS_FIELD_CORRECTION] [OUTPREFIX] [QUALITY_CHECK] [SIMILARITY_METRIC] [TRANSFORMATION_MODEL]",
   "author": "ANTs Developers",
   "description": "Script for registration using ANTS with compulsory and optional arguments.",
   "url": "https://github.com/ANTsX/ANTs",

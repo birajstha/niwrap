@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 FS_CHECK_VERSION_METADATA = Metadata(
-    id="af7504f7d0a748557b97d0668231df34d36c921c.boutiques",
+    id="1bb29df8432be8183122dba0b74d19ba214f7751.boutiques",
     name="fs-check-version",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -54,12 +54,10 @@ def fs_check_version(
     execution = runner.start_execution(FS_CHECK_VERSION_METADATA)
     cargs = []
     cargs.append("fs-check-version")
-    cargs.append("--sd")
     cargs.extend([
         "--sd",
         subjects_dir
     ])
-    cargs.append("--o")
     cargs.extend([
         "--o",
         outfile

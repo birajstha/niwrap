@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 SEGMENT_SUBJECT_SC_METADATA = Metadata(
-    id="a2763ec226e679f84ec01530f1c0e3bad1495f0d.boutiques",
+    id="7ef38e74b64cd360459b4e6d21acb9861982b04a.boutiques",
     name="segment_subject_sc",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -52,10 +52,14 @@ def segment_subject_sc(
     execution = runner.start_execution(SEGMENT_SUBJECT_SC_METADATA)
     cargs = []
     cargs.append("mri_nu_correct.mni")
-    cargs.append("--i")
-    cargs.append(execution.input_file(invol))
-    cargs.append("--xfm")
-    cargs.append(execution.input_file(outxfm))
+    cargs.extend([
+        "-i",
+        "-" + execution.input_file(invol)
+    ])
+    cargs.extend([
+        "-xfm",
+        "-" + execution.input_file(outxfm)
+    ])
     if log is not None:
         cargs.extend([
             "--log",
@@ -65,7 +69,7 @@ def segment_subject_sc(
         cargs.append("--debug")
     ret = SegmentSubjectScOutputs(
         root=execution.output_file("."),
-        output_xfm_file=execution.output_file(pathlib.Path(outxfm).name),
+        output_xfm_file=execution.output_file("[OUTPUT_XFM]"),
     )
     execution.run(cargs)
     return ret

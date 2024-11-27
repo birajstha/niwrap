@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V__NOISY_SKULL_STRIP_METADATA = Metadata(
-    id="c7ff4d34b7c1585d06f46e9b52322c91389d58c8.boutiques",
+    id="646c24f61ad1088f8919acaf02de020ef798e6e3.boutiques",
     name="@NoisySkullStrip",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -56,8 +56,10 @@ def v__noisy_skull_strip(
     execution = runner.start_execution(V__NOISY_SKULL_STRIP_METADATA)
     cargs = []
     cargs.append("@NoisySkullStrip")
-    cargs.append("-input")
-    cargs.append(execution.input_file(input_file))
+    cargs.extend([
+        "-input",
+        execution.input_file(input_file)
+    ])
     if keep_tmp:
         cargs.append("-keep_tmp")
     if v_3dskullstrip_opts is not None:
@@ -67,10 +69,10 @@ def v__noisy_skull_strip(
         ])
     ret = VNoisySkullStripOutputs(
         root=execution.output_file("."),
-        anat_ns=execution.output_file(pathlib.Path(input_file).name + ".ns"),
-        anat_air=execution.output_file(pathlib.Path(input_file).name + ".air"),
-        anat_skl=execution.output_file(pathlib.Path(input_file).name + ".skl"),
-        anat_lsp=execution.output_file(pathlib.Path(input_file).name + ".lsp"),
+        anat_ns=execution.output_file("[ANAT].ns"),
+        anat_air=execution.output_file("[ANAT].air"),
+        anat_skl=execution.output_file("[ANAT].skl"),
+        anat_lsp=execution.output_file("[ANAT].lsp"),
     )
     execution.run(cargs)
     return ret

@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MORPH_ONLY_SUBJECT_RH_METADATA = Metadata(
-    id="90a11b67142155020e5554eeae121c21d12a2dfc.boutiques",
+    id="f5e066989871c67bda328c2a6375ebf27199e0ac.boutiques",
     name="morph_only_subject-rh",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -47,11 +47,13 @@ def morph_only_subject_rh(
     runner = runner or get_global_runner()
     execution = runner.start_execution(MORPH_ONLY_SUBJECT_RH_METADATA)
     cargs = []
-    cargs.append("morph_only_subject-rh")
-    cargs.append(execution.input_file(subject_dir))
+    cargs.extend([
+        "-rh",
+        "morph_only_subject" + execution.input_file(subject_dir)
+    ])
     ret = MorphOnlySubjectRhOutputs(
         root=execution.output_file("."),
-        output_files=execution.output_file("/usr/local/freesurfer/subjects/" + pathlib.Path(subject_dir).name + "/rh.morph"),
+        output_files=execution.output_file("/usr/local/freesurfer/subjects/[OPTIONS]/rh.morph"),
     )
     execution.run(cargs)
     return ret

@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 FAT_PROC_SELECT_VOLS_METADATA = Metadata(
-    id="423b3bdef1ce58c3541799a5887c14712d5adc04.boutiques",
+    id="cb31e14381a19fc82fcd6af91248956f88712afa.boutiques",
     name="fat_proc_select_vols",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -63,12 +63,18 @@ def fat_proc_select_vols(
     execution = runner.start_execution(FAT_PROC_SELECT_VOLS_METADATA)
     cargs = []
     cargs.append("fat_proc_select_vols")
-    cargs.append("-in_dwi")
-    cargs.append(execution.input_file(dwi_input))
-    cargs.append("-in_img")
-    cargs.append(execution.input_file(img_input))
-    cargs.append("-prefix")
-    cargs.append(prefix)
+    cargs.extend([
+        "-in_dwi",
+        execution.input_file(dwi_input)
+    ])
+    cargs.extend([
+        "-in_img",
+        execution.input_file(img_input)
+    ])
+    cargs.extend([
+        "-prefix",
+        prefix
+    ])
     if in_bads is not None:
         cargs.extend([
             "-in_bads",
@@ -90,7 +96,7 @@ def fat_proc_select_vols(
         cargs.append("-no_cmd_out")
     ret = FatProcSelectVolsOutputs(
         root=execution.output_file("."),
-        output_selector_string=execution.output_file(prefix + "_bads.txt"),
+        output_selector_string=execution.output_file("[OUTPUT_PREFIX]_bads.txt"),
     )
     execution.run(cargs)
     return ret

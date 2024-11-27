@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MRI_MCSIM_METADATA = Metadata(
-    id="c593b644bdd83854dab4cb3be5d2d048b0dc5ee7.boutiques",
+    id="73012f283531e93870961626ae4aa0e9482975e1.boutiques",
     name="mri_mcsim",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -33,6 +33,7 @@ class MriMcsimOutputs(typing.NamedTuple):
 def mri_mcsim(
     top_output_dir: str,
     base_name: str,
+    surface: list[str],
     num_repetitions: float,
     fwhm_values: list[float] | None = None,
     fwhm_max: float | None = None,
@@ -65,6 +66,8 @@ def mri_mcsim(
     Args:
         top_output_dir: Top output directory.
         base_name: Base name for CSD files.
+        surface: Subject name and hemisphere for the surface (e.g., subjectname\
+            lh).
         num_repetitions: Number of repetitions for the simulation.
         fwhm_values: Full Width at Half Maximum values for smoothing.
         fwhm_max: Maximum FWHM for simulation (default 30).
@@ -89,23 +92,24 @@ def mri_mcsim(
     Returns:
         NamedTuple of outputs (described in `MriMcsimOutputs`).
     """
+    if (len(surface) != 2): 
+        raise ValueError(f"Length of 'surface' must be 2 but was {len(surface)}")
     runner = runner or get_global_runner()
     execution = runner.start_execution(MRI_MCSIM_METADATA)
     cargs = []
     cargs.append("mri_mcsim")
-    cargs.append("--o")
     cargs.extend([
         "--o",
         top_output_dir
     ])
-    cargs.append("--base")
     cargs.extend([
         "--base",
         base_name
     ])
-    cargs.append("--surface")
-    cargs.append("[SUBJECTNAME]")
-    cargs.append("[HEMISPHERE]")
+    cargs.extend([
+        "--surface",
+        *surface
+    ])
     cargs.extend([
         "--nreps",
         str(num_repetitions)
@@ -183,7 +187,7 @@ def mri_mcsim(
         cargs.append("--version")
     ret = MriMcsimOutputs(
         root=execution.output_file("."),
-        csd_output=execution.output_file(top_output_dir + "/" + base_name + ".csd"),
+        csd_output=execution.output_file(top_output_dir + "/[BASE].csd"),
         done_output=execution.output_file(top_output_dir + "/done/" + done_file) if (done_file is not None) else None,
         iteration_save=execution.output_file(top_output_dir + "/" + save_file) if (save_file is not None) else None,
         log_output=execution.output_file(top_output_dir + "/log/" + log_file) if (log_file is not None) else None,

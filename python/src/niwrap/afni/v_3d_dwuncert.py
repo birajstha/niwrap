@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V_3D_DWUNCERT_METADATA = Metadata(
-    id="e5435aa32b153e592fc54fcb544b034d7d4ed2ac.boutiques",
+    id="8f7f239d86c536d7e540a83e127aed316e05a15c.boutiques",
     name="3dDWUncert",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -63,37 +63,43 @@ def v_3d_dwuncert(
     execution = runner.start_execution(V_3D_DWUNCERT_METADATA)
     cargs = []
     cargs.append("3dDWUncert")
-    cargs.append("-inset")
-    cargs.append(execution.input_file(input_file))
-    cargs.append("-input")
-    cargs.append(input_prefix)
-    cargs.append("-prefix")
-    cargs.append(output_prefix)
-    cargs.append("-grads")
+    cargs.extend([
+        "-inset",
+        execution.input_file(input_file)
+    ])
+    cargs.extend([
+        "-input",
+        input_prefix
+    ])
+    cargs.extend([
+        "-prefix",
+        output_prefix
+    ])
     if grad_file is not None:
-        cargs.append(execution.input_file(grad_file))
-    cargs.append("-bmatrix_FULL")
+        cargs.extend([
+            "-grads",
+            execution.input_file(grad_file)
+        ])
     if bmatrix_file is not None:
-        cargs.append(execution.input_file(bmatrix_file))
-    cargs.append("-iters")
+        cargs.extend([
+            "-bmatrix_FULL",
+            execution.input_file(bmatrix_file)
+        ])
     if num_iters is not None:
         cargs.extend([
             "-iters",
             str(num_iters)
         ])
-    cargs.append("-mask")
     if mask_file is not None:
         cargs.extend([
             "-mask",
             execution.input_file(mask_file)
         ])
-    cargs.append("-calc_thr_FA")
     if calc_thr_fa is not None:
         cargs.extend([
             "-calc_thr_FA",
             str(calc_thr_fa)
         ])
-    cargs.append("-csf_fa")
     if csf_fa is not None:
         cargs.extend([
             "-csf_fa",

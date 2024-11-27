@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 LABEL_SUBJECT_MIXED_METADATA = Metadata(
-    id="32f3f6573d5256953661e6faba998790d044ce5b.boutiques",
+    id="143e688d23fdfb338716836e1f95b9ba4189af90.boutiques",
     name="label_subject_mixed",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -53,15 +53,17 @@ def label_subject_mixed(
     execution = runner.start_execution(LABEL_SUBJECT_MIXED_METADATA)
     cargs = []
     cargs.append("mri_ca_label")
-    cargs.append("-mask")
-    cargs.append(execution.input_file(brain_mask))
+    cargs.extend([
+        "-mask",
+        execution.input_file(brain_mask)
+    ])
     cargs.append(execution.input_file(norm_volume))
     cargs.append(execution.input_file(transform))
     cargs.append(execution.input_file(gca_file))
     cargs.append(aseg_output)
     ret = LabelSubjectMixedOutputs(
         root=execution.output_file("."),
-        output_aseg=execution.output_file(aseg_output),
+        output_aseg=execution.output_file("[ASEG]"),
     )
     execution.run(cargs)
     return ret

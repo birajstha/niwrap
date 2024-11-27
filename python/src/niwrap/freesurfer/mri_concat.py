@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MRI_CONCAT_METADATA = Metadata(
-    id="b68d73854cbf83c677458b019f3c0ed9f44f0998.boutiques",
+    id="07b7b4b76de79451ff17d85c367b7024bc7bb902.boutiques",
     name="mri_concat",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -46,7 +46,6 @@ def mri_concat(
     cargs = []
     cargs.append("mri_concat")
     cargs.extend([execution.input_file(f) for f in input_files])
-    cargs.append("--o")
     cargs.extend([
         "--o",
         output_file

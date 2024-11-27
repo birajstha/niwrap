@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 REG_MNI305_2MM_METADATA = Metadata(
-    id="00ddc6f036ed2b522204bcf3fcb2d116ce59b44f.boutiques",
+    id="baca96deead4a89fad3eca8defaa337786ee5cdf.boutiques",
     name="reg-mni305.2mm",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -49,12 +49,10 @@ def reg_mni305_2mm(
     execution = runner.start_execution(REG_MNI305_2MM_METADATA)
     cargs = []
     cargs.append("reg-mni305.2mm")
-    cargs.append("--s")
     cargs.extend([
         "--s",
         subject_id
     ])
-    cargs.append("--reg")
     cargs.extend([
         "--reg",
         execution.input_file(regfile)

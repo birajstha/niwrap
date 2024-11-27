@@ -3,7 +3,7 @@
   "name": "3dICC",
   "author": "AFNI Developers",
   "description": "AFNI Program for IntraClass Correlatin (ICC) Analysis",
-  "command-line": "3dICC [MODEL] -prefix [PREFIX] -mask [MASK] -dataTable [DATA_TABLE] [OPTIONS]",
+  "command-line": "3dICC [MODEL] [PREFIX] [MASK] [DATA_TABLE] [OPTIONS]",
   "inputs": [
     {
       "description": "Name of output file. For AFNI format, provide prefix only, with no view+suffix needed. Filename for NIfTI format should have .nii attached, while file name for surface data is expected to end with .niml.dset.",
@@ -11,7 +11,8 @@
       "type": "String",
       "optional": false,
       "id": "prefix",
-      "name": "Output file name"
+      "name": "Output file name",
+      "command-line-flag": "-prefix"
     },
     {
       "description": "Path to mask file. Only process voxels inside this mask.",
@@ -19,7 +20,8 @@
       "type": "File",
       "optional": true,
       "id": "mask",
-      "name": "Mask file"
+      "name": "Mask file",
+      "command-line-flag": "-mask"
     },
     {
       "description": "Model structure for all the variables. The expression FORMULA with more than one variable has to be surrounded within quotes. Variable names should be consistent with the ones used in the header of -dataTable.",
@@ -35,7 +37,8 @@
       "type": "String",
       "optional": false,
       "id": "data_table",
-      "name": "Data table"
+      "name": "Data table",
+      "command-line-flag": "-dataTable"
     },
     {
       "command-line-flag": "-bounds",
@@ -70,7 +73,7 @@
     {
       "command-line-flag": "-qVarCenters",
       "description": "Specify centering values for quantitative variables identified under -qVars. Multiple centers are separated by commas and should be surrounded within quotes.",
-      "value-key": "[QVARS_CENTERS]",
+      "value-key": "[QVARCENTERS]",
       "type": "String",
       "optional": true,
       "id": "qVarCenters",
@@ -88,7 +91,7 @@
     {
       "command-line-flag": "-IF",
       "description": "Specify the last column name that is designated for input files of effect estimate.",
-      "value-key": "[IF]",
+      "value-key": "[INPUT_FILE_COLUMN]",
       "type": "String",
       "optional": true,
       "id": "input_file_column",
@@ -106,7 +109,7 @@
     {
       "command-line-flag": "-dbgArgs",
       "description": "Enable R to save the parameters in a file called .3dICC.dbg.AFNI.args in the current directory for debugging.",
-      "value-key": "[DBGARGS_FLAG]",
+      "value-key": "[DBGARGS]",
       "type": "Flag",
       "optional": true,
       "id": "dbgArgs",
@@ -115,7 +118,7 @@
     {
       "command-line-flag": "-cio",
       "description": "Use AFNI's C io functions. Default is -cio.",
-      "value-key": "[CIO_FLAG]",
+      "value-key": "[CIO]",
       "type": "Flag",
       "optional": true,
       "id": "cio",
@@ -124,7 +127,7 @@
     {
       "command-line-flag": "-Rio",
       "description": "Use R's io functions.",
-      "value-key": "[RIO_FLAG]",
+      "value-key": "[RIO]",
       "type": "Flag",
       "optional": true,
       "id": "rio",

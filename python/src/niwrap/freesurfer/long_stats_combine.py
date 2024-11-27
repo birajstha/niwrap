@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 LONG_STATS_COMBINE_METADATA = Metadata(
-    id="644b8942f058ac01f4359e0e72cfab817e39e898.boutiques",
+    id="0d340216188db7f22afc5a0e93c0fbb3c31d0d6c.boutiques",
     name="long_stats_combine",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -22,7 +22,7 @@ class LongStatsCombineOutputs(typing.NamedTuple):
     """Output root folder. This is the root folder for all outputs."""
     output_qdec_file: OutputPathType
     """Output long qdec table"""
-    output_stacked_stats_file: OutputPathType | None
+    output_stacked_stats_file: OutputPathType
     """Stacked stats table for all subjects, all time points"""
 
 
@@ -65,22 +65,18 @@ def long_stats_combine(
     execution = runner.start_execution(LONG_STATS_COMBINE_METADATA)
     cargs = []
     cargs.append("long_stats_combine")
-    cargs.append("--qdec")
     cargs.extend([
         "--qdec",
         execution.input_file(qdec)
     ])
-    cargs.append("--stats")
     cargs.extend([
         "--stats",
         stats
     ])
-    cargs.append("--meas")
     cargs.extend([
         "--meas",
         measure
     ])
-    cargs.append("--sd")
     cargs.extend([
         "--sd",
         subject_dir
@@ -104,8 +100,8 @@ def long_stats_combine(
         cargs.append("--cross")
     ret = LongStatsCombineOutputs(
         root=execution.output_file("."),
-        output_qdec_file=execution.output_file(output_qdec),
-        output_stacked_stats_file=execution.output_file(output_stats) if (output_stats is not None) else None,
+        output_qdec_file=execution.output_file("[OUTQDEC]"),
+        output_stacked_stats_file=execution.output_file("[OUTSTATS]"),
     )
     execution.run(cargs)
     return ret

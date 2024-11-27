@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 FSL_BOXPLOT_METADATA = Metadata(
-    id="6ce64b0211de9a912d5e7cf2ee8df522daea093f.boutiques",
+    id="8abcb032f30a04f5dd6924727b860dc8df188123.boutiques",
     name="fsl_boxplot",
     package="fsl",
     container_image_tag="brainlife/fsl:6.0.4-patched2",
@@ -60,12 +60,10 @@ def fsl_boxplot(
     execution = runner.start_execution(FSL_BOXPLOT_METADATA)
     cargs = []
     cargs.append("fsl_boxplot")
-    cargs.append("--in")
     cargs.extend([
         "--in",
         *[execution.input_file(f) for f in input_files]
     ])
-    cargs.append("--out")
     cargs.extend([
         "--out",
         output_image

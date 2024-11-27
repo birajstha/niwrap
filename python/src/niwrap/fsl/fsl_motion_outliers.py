@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 FSL_MOTION_OUTLIERS_METADATA = Metadata(
-    id="f90025a0db160e41a61839f791f02c33a87b669e.boutiques",
+    id="f6b6f5bc24c4f96b4e06e73ce63e58c1defb7bdf.boutiques",
     name="fsl_motion_outliers",
     package="fsl",
     container_image_tag="brainlife/fsl:6.0.4-patched2",
@@ -83,10 +83,14 @@ def fsl_motion_outliers(
     execution = runner.start_execution(FSL_MOTION_OUTLIERS_METADATA)
     cargs = []
     cargs.append("fsl_motion_outliers")
-    cargs.append("-i")
-    cargs.append(execution.input_file(input_4d_image))
-    cargs.append("-o")
-    cargs.append(output_confound_file)
+    cargs.extend([
+        "-i",
+        execution.input_file(input_4d_image)
+    ])
+    cargs.extend([
+        "-o",
+        output_confound_file
+    ])
     if mask_image is not None:
         cargs.extend([
             "-m",

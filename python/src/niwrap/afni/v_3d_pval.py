@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V_3D_PVAL_METADATA = Metadata(
-    id="46c925a4b50a70594f3798bcdbc07a858aad1fa6.boutiques",
+    id="728ce13fea332a59b9d1741e5383247954eba774.boutiques",
     name="3dPval",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -68,7 +68,6 @@ def v_3d_pval(
         cargs.append("-log10")
     if qval:
         cargs.append("-qval")
-    cargs.append("-prefix")
     if prefix is not None:
         cargs.extend([
             "-prefix",

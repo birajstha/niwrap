@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MRI_DEFACER_METADATA = Metadata(
-    id="b7a1aaf9b5947804211cdf0360ab244cd298666a.boutiques",
+    id="46f94f77407f2c0b404818493966409a1d748b0f.boutiques",
     name="mri_defacer",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -30,6 +30,7 @@ def mri_defacer(
     templabel: list[InputPathType] | None = None,
     watermark: float | None = None,
     facemask: str | None = None,
+    fill_constants: list[float] | None = None,
     exclude_mask: InputPathType | None = None,
     runner: Runner | None = None,
 ) -> MriDefacerOutputs:
@@ -48,6 +49,7 @@ def mri_defacer(
         templabel: Template label, specify one or multiple labels.
         watermark: Watermark density.
         facemask: Face mask volume.
+        fill_constants: Constants for filling within/outside the mask.
         exclude_mask: Mask to exclude from defacing.
         runner: Command runner.
     Returns:
@@ -57,36 +59,42 @@ def mri_defacer(
     execution = runner.start_execution(MRI_DEFACER_METADATA)
     cargs = []
     cargs.append("mri_defacer")
-    cargs.append("--i")
-    cargs.append(execution.input_file(input_volume))
-    cargs.append("--hm")
-    cargs.append(execution.input_file(headmask))
-    cargs.append("--ts")
-    cargs.append(execution.input_file(tempsurf))
-    cargs.append("--l")
+    cargs.extend([
+        "-i",
+        "-" + execution.input_file(input_volume)
+    ])
+    cargs.extend([
+        "-hm",
+        "-" + execution.input_file(headmask)
+    ])
+    cargs.extend([
+        "-ts",
+        "-" + execution.input_file(tempsurf)
+    ])
     if templabel is not None:
         cargs.extend([
             "--l",
             *[execution.input_file(f) for f in templabel]
         ])
-    cargs.append("--w")
     if watermark is not None:
         cargs.extend([
             "--w",
             str(watermark)
         ])
-    cargs.append("--o")
-    cargs.append(defaced_volume)
-    cargs.append("--m")
+    cargs.extend([
+        "-o",
+        "-" + defaced_volume
+    ])
     if facemask is not None:
         cargs.extend([
             "--m",
             facemask
         ])
-    cargs.append("--fill-const")
-    cargs.append("[CONST_IN]")
-    cargs.append("[CONST_OUT]")
-    cargs.append("--xmask")
+    if fill_constants is not None:
+        cargs.extend([
+            "--fill-const",
+            *map(str, fill_constants)
+        ])
     if exclude_mask is not None:
         cargs.extend([
             "--xmask",

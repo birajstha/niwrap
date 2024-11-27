@@ -1,7 +1,7 @@
 {
   "name": "mris_multimodal",
   "description": "A FreeSurfer tool for processing multimodal surface data.",
-  "command-line": "mris_multimodal -i [INPUT_SURFACE] -t [TARGET_SURFACE] -o [OUTPUT_SURFACE] [FILL_HOLES_FLAG] [CURVATURE_FLAG] [THICKNESS_FLAG] -a [ANNOTATION_OUTPUT] -v [OVERLAY_OUTPUT] -c [CSV_OUTPUT] [VTK_FLAG]",
+  "command-line": "mris_multimodal [INPUT_SURFACE] [TARGET_SURFACE] [OUTPUT_SURFACE] [FILL_HOLES] [CURVATURE] [THICKNESS] [ANNOTATION_OUTPUT] [OVERLAY_OUTPUT] [CSV_OUTPUT] [VTK_OUTPUT]",
   "schema-version": "0.5",
   "inputs": [
     {
@@ -10,7 +10,8 @@
       "type": "File",
       "optional": false,
       "id": "input_surface",
-      "name": "Input Surface"
+      "name": "Input Surface",
+      "command-line-flag": "-i"
     },
     {
       "description": "Target surface file.",
@@ -18,7 +19,8 @@
       "type": "File",
       "optional": false,
       "id": "target_surface",
-      "name": "Target Surface"
+      "name": "Target Surface",
+      "command-line-flag": "-t"
     },
     {
       "description": "Output surface file.",
@@ -26,12 +28,13 @@
       "type": "File",
       "optional": false,
       "id": "output_surface",
-      "name": "Output Surface"
+      "name": "Output Surface",
+      "command-line-flag": "-o"
     },
     {
       "command-line-flag": "-fillHoles",
       "description": "Flag to fill holes in the surface.",
-      "value-key": "[FILL_HOLES_FLAG]",
+      "value-key": "[FILL_HOLES]",
       "type": "Flag",
       "optional": true,
       "id": "fill_holes",
@@ -40,7 +43,7 @@
     {
       "command-line-flag": "--curvature",
       "description": "Flag to process curvature data.",
-      "value-key": "[CURVATURE_FLAG]",
+      "value-key": "[CURVATURE]",
       "type": "Flag",
       "optional": true,
       "id": "curvature",
@@ -49,7 +52,7 @@
     {
       "command-line-flag": "--thickness",
       "description": "Flag to process thickness data.",
-      "value-key": "[THICKNESS_FLAG]",
+      "value-key": "[THICKNESS]",
       "type": "Flag",
       "optional": true,
       "id": "thickness",
@@ -85,7 +88,7 @@
     {
       "command-line-flag": "-vtk",
       "description": "Flag to output VTK file format.",
-      "value-key": "[VTK_FLAG]",
+      "value-key": "[VTK_OUTPUT]",
       "type": "Flag",
       "optional": true,
       "id": "vtk_output",

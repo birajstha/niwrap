@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 PROMPT_POPUP_METADATA = Metadata(
-    id="86851443966e9bfb5766658bc6ca87fa7bd600d7.boutiques",
+    id="56ce96c081577f794f865f7030869659d97db1e1.boutiques",
     name="prompt_popup",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -48,19 +48,16 @@ def prompt_popup(
     execution = runner.start_execution(PROMPT_POPUP_METADATA)
     cargs = []
     cargs.append("prompt_popup")
-    cargs.append("-message")
     if message_pause is not None:
         cargs.extend([
             "-pause",
             message_pause
         ])
-    cargs.append("-button")
     if buttons_b is not None:
         cargs.extend([
             "-b",
             *buttons_b
         ])
-    cargs.append("-timeout")
     if timeout_to is not None:
         cargs.extend([
             "-to",

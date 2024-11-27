@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MRI_COREG_METADATA = Metadata(
-    id="9bbb6e6425088ffae2c2ae1d212b227cca2ac3c8.boutiques",
+    id="84d13839566539d9943c63606ca323433fbdbc9c.boutiques",
     name="mri_coreg",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -62,16 +62,22 @@ def mri_coreg(
     execution = runner.start_execution(MRI_COREG_METADATA)
     cargs = []
     cargs.append("mri_coreg")
-    cargs.append("--mov")
-    cargs.append(execution.input_file(movvol))
-    cargs.append("--ref")
-    cargs.append(execution.input_file(refvol))
-    cargs.append("--reg")
-    cargs.append(reg)
+    cargs.extend([
+        "-mov",
+        "-" + execution.input_file(movvol)
+    ])
+    cargs.extend([
+        "-ref",
+        "-" + execution.input_file(refvol)
+    ])
+    cargs.extend([
+        "-reg",
+        "-" + reg
+    ])
     cargs.append("[ADDITIONAL_PARAMETERS]")
     ret = MriCoregOutputs(
         root=execution.output_file("."),
-        out_registration=execution.output_file(reg),
+        out_registration=execution.output_file("[REGISTRATION]"),
         out_params=execution.output_file("[OUT_PARAM_FILE]"),
         out_cost=execution.output_file("[OUT_COST_FILE]"),
         saved_init_reg=execution.output_file("[INIT_REG_SAVE]"),

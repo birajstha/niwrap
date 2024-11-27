@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 REG_FEAT2ANAT_METADATA = Metadata(
-    id="f85ca9bdedc584505f032005f97326ce3f70e7a6.boutiques",
+    id="6d99523d12853983a4cb41cacabf4975bd54d655.boutiques",
     name="reg-feat2anat",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -90,12 +90,10 @@ def reg_feat2anat(
     execution = runner.start_execution(REG_FEAT2ANAT_METADATA)
     cargs = []
     cargs.append("reg-feat2anat")
-    cargs.append("--feat")
     cargs.extend([
         "--feat",
         feat_dir
     ])
-    cargs.append("--subject")
     cargs.extend([
         "--subject",
         subject_id

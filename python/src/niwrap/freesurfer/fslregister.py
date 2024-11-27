@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 FSLREGISTER_METADATA = Metadata(
-    id="0601e6dd8fcbca9c72182d658cd9dd3ef5daab58.boutiques",
+    id="bfe0dbf3fd2f8c6b49cdb27e6484d3377aa1763f.boutiques",
     name="fslregister",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -22,13 +22,13 @@ class FslregisterOutputs(typing.NamedTuple):
     """Output root folder. This is the root folder for all outputs."""
     output_reg_file: OutputPathType
     """Output registration file."""
-    output_resliced_volume: OutputPathType | None
+    output_resliced_volume: OutputPathType
     """Resliced output volume."""
-    output_fsl_matrix: OutputPathType | None
+    output_fsl_matrix: OutputPathType
     """FSL format output registration matrix."""
-    lta_output: OutputPathType | None
+    lta_output: OutputPathType
     """Registration output in LTA format."""
-    output_template: OutputPathType | None
+    output_template: OutputPathType
     """Output template."""
 
 
@@ -113,17 +113,14 @@ def fslregister(
     execution = runner.start_execution(FSLREGISTER_METADATA)
     cargs = []
     cargs.append("fslregister")
-    cargs.append("--s")
     cargs.extend([
         "--s",
         subjid
     ])
-    cargs.append("--mov")
     cargs.extend([
         "--mov",
         mov_vol
     ])
-    cargs.append("--reg")
     cargs.extend([
         "--reg",
         reg_file
@@ -230,10 +227,10 @@ def fslregister(
     ret = FslregisterOutputs(
         root=execution.output_file("."),
         output_reg_file=execution.output_file(reg_file),
-        output_resliced_volume=execution.output_file(output_volume) if (output_volume is not None) else None,
-        output_fsl_matrix=execution.output_file(fsl_matrix) if (fsl_matrix is not None) else None,
-        lta_output=execution.output_file(lta_format) if (lta_format is not None) else None,
-        output_template=execution.output_file(template_output) if (template_output is not None) else None,
+        output_resliced_volume=execution.output_file("[OUT_VOL]"),
+        output_fsl_matrix=execution.output_file("[FSL_MAT]"),
+        lta_output=execution.output_file("[LTA]"),
+        output_template=execution.output_file("[TEMPLATE_OUT]"),
     )
     execution.run(cargs)
     return ret

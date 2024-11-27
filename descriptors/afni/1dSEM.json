@@ -5,7 +5,7 @@
   "descriptor-url": "https://afni.nimh.nih.gov/sscc/gangc/PathAna.html",
   "description": "Computes path coefficients for connection matrix in Structural Equation Modeling (SEM).",
   "url": "https://afni.nimh.nih.gov/",
-  "command-line": "1dSEM -theta [THETA_FILE] -C [CORRELATION_MATRIX] -psi [RESIDUAL_VARIANCE] -DF [DEGREES_OF_FREEDOM] [OPTIONS]",
+  "command-line": "1dSEM [THETA] [CORRELATION_MATRIX] [RESIDUAL_VARIANCE] [DEGREES_OF_FREEDOM] [OPTIONS]",
   "container-image": {
     "type": "docker",
     "image": "afni/afni_make_build:AFNI_24.2.06"
@@ -13,11 +13,12 @@
   "inputs": [
     {
       "description": "Connection matrix 1D file with initial representation",
-      "value-key": "[THETA_FILE]",
+      "value-key": "[THETA]",
       "type": "File",
       "optional": false,
       "id": "theta",
-      "name": "Theta File"
+      "name": "Theta File",
+      "command-line-flag": "-theta"
     },
     {
       "description": "Correlation matrix 1D file",
@@ -25,7 +26,8 @@
       "type": "File",
       "optional": false,
       "id": "correlation_matrix",
-      "name": "Correlation Matrix"
+      "name": "Correlation Matrix",
+      "command-line-flag": "-C"
     },
     {
       "description": "Residual variance vector 1D file",
@@ -33,7 +35,8 @@
       "type": "File",
       "optional": false,
       "id": "residual_variance",
-      "name": "Residual Variance"
+      "name": "Residual Variance",
+      "command-line-flag": "-psi"
     },
     {
       "description": "Degrees of freedom",
@@ -41,12 +44,13 @@
       "type": "Number",
       "optional": false,
       "id": "degrees_of_freedom",
-      "name": "Degrees of Freedom"
+      "name": "Degrees of Freedom",
+      "command-line-flag": "-DF"
     },
     {
       "command-line-flag": "-max_iter",
       "description": "Maximum number of iterations for convergence (Default=10000). Values can range from 1 to any positive integer less than 10000.",
-      "value-key": "[MAX_ITER]",
+      "value-key": "[MAX_ITERATIONS]",
       "type": "Number",
       "integer": true,
       "optional": true,
@@ -56,7 +60,7 @@
     {
       "command-line-flag": "-nrand",
       "description": "Number of random trials before optimization (Default = 100).",
-      "value-key": "[NRAND]",
+      "value-key": "[NUMBER_RANDOM_TRIALS]",
       "type": "Number",
       "integer": true,
       "optional": true,
@@ -78,7 +82,7 @@
     {
       "command-line-flag": "-calccost",
       "description": "No modeling at all, just calculate the cost function for the coefficients as given in the theta file.",
-      "value-key": "[CALC_COST]",
+      "value-key": "[CALCULATE_COST]",
       "type": "Flag",
       "optional": true,
       "id": "calculate_cost",

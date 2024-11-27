@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V_3D_TORTOISETO_HERE_METADATA = Metadata(
-    id="83f372724dc58e7674ba98fc48a12133c4132934.boutiques",
+    id="daf64b9d38f580b031c7bf8ec8344f0a10916677.boutiques",
     name="3dTORTOISEtoHere",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -60,12 +60,10 @@ def v_3d_tortoiseto_here(
     execution = runner.start_execution(V_3D_TORTOISETO_HERE_METADATA)
     cargs = []
     cargs.append("3dTORTOISEtoHere")
-    cargs.append("-dt_tort")
     cargs.extend([
         "-dt_tort",
         execution.input_file(dt_tort)
     ])
-    cargs.append("-prefix")
     cargs.extend([
         "-prefix",
         prefix

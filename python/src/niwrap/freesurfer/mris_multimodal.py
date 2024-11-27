@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MRIS_MULTIMODAL_METADATA = Metadata(
-    id="5ea3bb028d4f416812a4635db5e70c0c093edcbb.boutiques",
+    id="2538165a13ddb942b3f140f14c2c3852f648e85c.boutiques",
     name="mris_multimodal",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -69,29 +69,32 @@ def mris_multimodal(
     execution = runner.start_execution(MRIS_MULTIMODAL_METADATA)
     cargs = []
     cargs.append("mris_multimodal")
-    cargs.append("-i")
-    cargs.append(execution.input_file(input_surface))
-    cargs.append("-t")
-    cargs.append(execution.input_file(target_surface))
-    cargs.append("-o")
-    cargs.append(execution.input_file(output_surface))
+    cargs.extend([
+        "-i",
+        execution.input_file(input_surface)
+    ])
+    cargs.extend([
+        "-t",
+        execution.input_file(target_surface)
+    ])
+    cargs.extend([
+        "-o",
+        execution.input_file(output_surface)
+    ])
     if fill_holes:
         cargs.append("-fillHoles")
     if curvature:
         cargs.append("--curvature")
     if thickness:
         cargs.append("--thickness")
-    cargs.append("-a")
     cargs.extend([
         "-a",
         execution.input_file(annotation_output)
     ])
-    cargs.append("-v")
     cargs.extend([
         "-v",
         execution.input_file(overlay_output)
     ])
-    cargs.append("-c")
     cargs.extend([
         "-c",
         execution.input_file(csv_output)

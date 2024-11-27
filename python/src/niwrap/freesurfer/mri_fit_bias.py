@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MRI_FIT_BIAS_METADATA = Metadata(
-    id="cf8d10003f869e3e7ca124a53deaebc1f5c089d0.boutiques",
+    id="dbc7b4a918415c0135e06478ff062038cee7a37e.boutiques",
     name="mri_fit_bias",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -71,56 +71,46 @@ def mri_fit_bias(
     execution = runner.start_execution(MRI_FIT_BIAS_METADATA)
     cargs = []
     cargs.append("mri_fit_bias")
-    cargs.append("--i")
     cargs.extend([
         "--i",
         execution.input_file(inputvol)
     ])
-    cargs.append("--cutoff")
     if lpf_cutoff is not None:
         cargs.extend([
             "--cutoff",
             str(lpf_cutoff)
         ])
-    cargs.append("--seg")
     cargs.extend([
         "--seg",
         execution.input_file(segvol)
     ])
-    cargs.append("--mask")
     cargs.extend([
         "--mask",
         execution.input_file(maskvol)
     ])
-    cargs.append("--o")
     cargs.extend([
         "--o",
         outvol
     ])
-    cargs.append("--bias")
     cargs.extend([
         "--bias",
         biasfield
     ])
-    cargs.append("--dct")
     if dctvol is not None:
         cargs.extend([
             "--dct",
             dctvol
         ])
-    cargs.append("--thresh")
     if threshold is not None:
         cargs.extend([
             "--thresh",
             str(threshold)
         ])
-    cargs.append("--erode")
     if nerode is not None:
         cargs.extend([
             "--erode",
             str(nerode)
         ])
-    cargs.append("--threads")
     if nthreads is not None:
         cargs.extend([
             "--threads",
@@ -132,8 +122,8 @@ def mri_fit_bias(
         cargs.append("--checkopts")
     ret = MriFitBiasOutputs(
         root=execution.output_file("."),
-        corrected_output=execution.output_file(outvol),
-        generated_bias_field=execution.output_file(biasfield),
+        corrected_output=execution.output_file("[OUT_VOL]"),
+        generated_bias_field=execution.output_file("[BIAS_FIELD]"),
     )
     execution.run(cargs)
     return ret

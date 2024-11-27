@@ -2,16 +2,17 @@
   "tool-version": "7.4.1",
   "name": "run-qdec-glm",
   "description": "QDEC GLM (General Linear Model) execution tool for statistical analysis.",
-  "command-line": "run-qdec-glm [QDECDIR]",
+  "command-line": "run-qdec[QDEC_DIRECTORY]",
   "schema-version": "0.5",
   "inputs": [
     {
       "description": "Directory containing QDEC data",
-      "value-key": "[QDECDIR]",
+      "value-key": "[QDEC_DIRECTORY]",
       "type": "String",
       "optional": false,
       "id": "qdec_directory",
-      "name": "QDEC Directory"
+      "name": "QDEC Directory",
+      "command-line-flag": "-glm"
     }
   ],
   "author": "FreeSurfer Developers",

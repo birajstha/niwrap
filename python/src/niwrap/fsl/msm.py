@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MSM_METADATA = Metadata(
-    id="42c235fa5ff1dc323300561a80c2d758243cb0f4.boutiques",
+    id="bfab58a91ee8e696e19e1066e4388d1ee9bd9338.boutiques",
     name="msm",
     package="fsl",
     container_image_tag="brainlife/fsl:6.0.4-patched2",
@@ -92,8 +92,10 @@ def msm(
     cargs = []
     cargs.append("msm")
     cargs.append(execution.input_file(inmesh))
-    cargs.append("--out")
-    cargs.append(out)
+    cargs.extend([
+        "-out",
+        "-" + out
+    ])
     if refmesh is not None:
         cargs.extend([
             "--refmesh",
@@ -157,7 +159,7 @@ def msm(
         cargs.append("-p")
     ret = MsmOutputs(
         root=execution.output_file("."),
-        output_file=execution.output_file(out + "_output.ext"),
+        output_file=execution.output_file("[OUTPUT_BASENAME]_output.ext"),
     )
     execution.run(cargs)
     return ret

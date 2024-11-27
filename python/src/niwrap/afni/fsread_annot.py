@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 FSREAD_ANNOT_METADATA = Metadata(
-    id="d6cd0f7bce55789b13d629787f5523d58b155de7.boutiques",
+    id="1aee44cf7efa00cb2630f7f3d7fb84af69eadb4f.boutiques",
     name="FSread_annot",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -77,8 +77,10 @@ def fsread_annot(
     execution = runner.start_execution(FSREAD_ANNOT_METADATA)
     cargs = []
     cargs.append("FSread_annot")
-    cargs.append("--input")
-    cargs.append(execution.input_file(infile))
+    cargs.extend([
+        "-input",
+        "-" + execution.input_file(infile)
+    ])
     if hemi is not None:
         cargs.extend([
             "-hemi",

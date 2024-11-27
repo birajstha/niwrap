@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V_3D_TFILTER_METADATA = Metadata(
-    id="0604d522cb0075ad07593c0f28482b95f959239c.boutiques",
+    id="7dd3815aa288bcb4987a057312b3b363050b8024.boutiques",
     name="3dTfilter",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -50,12 +50,10 @@ def v_3d_tfilter(
     execution = runner.start_execution(V_3D_TFILTER_METADATA)
     cargs = []
     cargs.append("3dTfilter")
-    cargs.append("-input")
     cargs.extend([
         "-input",
         execution.input_file(inputdataset)
     ])
-    cargs.append("-prefix")
     cargs.extend([
         "-prefix",
         outputdataset
@@ -66,7 +64,7 @@ def v_3d_tfilter(
     ])
     ret = V3dTfilterOutputs(
         root=execution.output_file("."),
-        output_dataset=execution.output_file(outputdataset),
+        output_dataset=execution.output_file("[OUTPUT_FILE]"),
     )
     execution.run(cargs)
     return ret

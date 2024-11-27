@@ -3,7 +3,7 @@
   "name": "post-recon-all",
   "author": "FreeSurfer Developers",
   "description": "Post-processing script typically run after recon-all in FreeSurfer",
-  "command-line": "post-recon-all [SUBJECT] [SUBFIELDS_FLAG] [SUBREGIONS_FLAG] [CVS_FLAG] [QCACHE_FLAG] [SCLIMBIC_FLAG] [HTHSU_FLAG] [SYNTHSTRIP_FLAG] [SYNTHSEG_FLAG] [QASTATS_FLAG] [SAMSEG_FLAG] [XHEMI_FLAG] [COS7_FLAG] [THREADS] [FORCE_FLAG] [EXIT_ON_ERROR_FLAG]",
+  "command-line": "post-recon[SUBJECT] [NO_SUBFIELDS] [NO_SUBREGIONS] [NO_CVS] [NO_QCACHE] [NO_SCLIMBIC] [NO_HTHSU] [NO_SYNTHSTRIP] [NO_SYNTHSEG] [NO_QASTATS] [NO_SAMSEG] [NO_XHEMI] [NO_COS7] [THREADS] [FORCE] [EXIT_ON_ERROR]",
   "schema-version": "0.5",
   "inputs": [
     {
@@ -12,12 +12,13 @@
       "type": "String",
       "optional": false,
       "id": "subject",
-      "name": "Subject"
+      "name": "Subject",
+      "command-line-flag": "-all"
     },
     {
       "command-line-flag": "--subfields",
       "description": "Run subfields extraction (default behavior)",
-      "value-key": "[SUBFIELDS_FLAG]",
+      "value-key": "[SUBFIELDS]",
       "type": "Flag",
       "optional": true,
       "id": "subfields",
@@ -26,7 +27,7 @@
     {
       "command-line-flag": "--no-subfields",
       "description": "Do not run subfields extraction",
-      "value-key": "[SUBFIELDS_FLAG]",
+      "value-key": "[NO_SUBFIELDS]",
       "type": "Flag",
       "optional": true,
       "id": "no_subfields",
@@ -35,7 +36,7 @@
     {
       "command-line-flag": "--subregions",
       "description": "Run subregions extraction (default behavior)",
-      "value-key": "[SUBREGIONS_FLAG]",
+      "value-key": "[SUBREGIONS]",
       "type": "Flag",
       "optional": true,
       "id": "subregions",
@@ -44,7 +45,7 @@
     {
       "command-line-flag": "--no-subregions",
       "description": "Do not run subregions extraction",
-      "value-key": "[SUBREGIONS_FLAG]",
+      "value-key": "[NO_SUBREGIONS]",
       "type": "Flag",
       "optional": true,
       "id": "no_subregions",
@@ -53,7 +54,7 @@
     {
       "command-line-flag": "--cvs",
       "description": "Run CVS processing",
-      "value-key": "[CVS_FLAG]",
+      "value-key": "[CVS]",
       "type": "Flag",
       "optional": true,
       "id": "cvs",
@@ -62,7 +63,7 @@
     {
       "command-line-flag": "--no-cvs",
       "description": "Do not run CVS processing (default behavior)",
-      "value-key": "[CVS_FLAG]",
+      "value-key": "[NO_CVS]",
       "type": "Flag",
       "optional": true,
       "id": "no_cvs",
@@ -71,7 +72,7 @@
     {
       "command-line-flag": "--qcache",
       "description": "Run qcache processing (default behavior)",
-      "value-key": "[QCACHE_FLAG]",
+      "value-key": "[QCACHE]",
       "type": "Flag",
       "optional": true,
       "id": "qcache",
@@ -80,7 +81,7 @@
     {
       "command-line-flag": "--no-qcache",
       "description": "Do not run qcache processing",
-      "value-key": "[QCACHE_FLAG]",
+      "value-key": "[NO_QCACHE]",
       "type": "Flag",
       "optional": true,
       "id": "no_qcache",
@@ -89,7 +90,7 @@
     {
       "command-line-flag": "--no-sclimbic",
       "description": "Do not run sclimbic processing",
-      "value-key": "[SCLIMBIC_FLAG]",
+      "value-key": "[NO_SCLIMBIC]",
       "type": "Flag",
       "optional": true,
       "id": "no_sclimbic",
@@ -98,7 +99,7 @@
     {
       "command-line-flag": "--no-hthsu",
       "description": "Do not run hypothalamic subunits processing",
-      "value-key": "[HTHSU_FLAG]",
+      "value-key": "[NO_HTHSU]",
       "type": "Flag",
       "optional": true,
       "id": "no_hthsu",
@@ -107,7 +108,7 @@
     {
       "command-line-flag": "--no-synthstrip",
       "description": "Do not run synthstrip processing",
-      "value-key": "[SYNTHSTRIP_FLAG]",
+      "value-key": "[NO_SYNTHSTRIP]",
       "type": "Flag",
       "optional": true,
       "id": "no_synthstrip",
@@ -116,7 +117,7 @@
     {
       "command-line-flag": "--no-synthseg",
       "description": "Do not run synthseg processing",
-      "value-key": "[SYNTHSEG_FLAG]",
+      "value-key": "[NO_SYNTHSEG]",
       "type": "Flag",
       "optional": true,
       "id": "no_synthseg",
@@ -125,7 +126,7 @@
     {
       "command-line-flag": "--no-qastats",
       "description": "Do not run qastats processing",
-      "value-key": "[QASTATS_FLAG]",
+      "value-key": "[NO_QASTATS]",
       "type": "Flag",
       "optional": true,
       "id": "no_qastats",
@@ -134,7 +135,7 @@
     {
       "command-line-flag": "--no-samseg",
       "description": "Do not run samseg processing",
-      "value-key": "[SAMSEG_FLAG]",
+      "value-key": "[NO_SAMSEG]",
       "type": "Flag",
       "optional": true,
       "id": "no_samseg",
@@ -143,7 +144,7 @@
     {
       "command-line-flag": "--no-xhemi",
       "description": "Do not run xhemi processing",
-      "value-key": "[XHEMI_FLAG]",
+      "value-key": "[NO_XHEMI]",
       "type": "Flag",
       "optional": true,
       "id": "no_xhemi",
@@ -152,7 +153,7 @@
     {
       "command-line-flag": "--no-cos7",
       "description": "Do not run commands from CentOS7 container",
-      "value-key": "[COS7_FLAG]",
+      "value-key": "[NO_COS7]",
       "type": "Flag",
       "optional": true,
       "id": "no_cos7",
@@ -170,7 +171,7 @@
     {
       "command-line-flag": "--force",
       "description": "Force rerunning even if output is newer than input",
-      "value-key": "[FORCE_FLAG]",
+      "value-key": "[FORCE]",
       "type": "Flag",
       "optional": true,
       "id": "force",
@@ -179,7 +180,7 @@
     {
       "command-line-flag": "--exit-on-error",
       "description": "Exit immediately if an error occurs",
-      "value-key": "[EXIT_ON_ERROR_FLAG]",
+      "value-key": "[EXIT_ON_ERROR]",
       "type": "Flag",
       "optional": true,
       "id": "exit_on_error",

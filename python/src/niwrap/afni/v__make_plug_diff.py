@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V__MAKE_PLUG_DIFF_METADATA = Metadata(
-    id="04657da55e97a5ef906b2bfec20e16f6d1e28b7b.boutiques",
+    id="ed24df6f541e54eb4e1231d905483a763eecd72f.boutiques",
     name="@make_plug_diff",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -55,22 +55,18 @@ def v__make_plug_diff(
     execution = runner.start_execution(V__MAKE_PLUG_DIFF_METADATA)
     cargs = []
     cargs.append("@make_plug_diff")
-    cargs.append("-vtk")
     cargs.extend([
         "-vtk",
         vtk_dir
     ])
-    cargs.append("-xm")
     cargs.extend([
         "-xm",
         xm_dir
     ])
-    cargs.append("-asrc")
     cargs.extend([
         "-asrc",
         afni_src_dir
     ])
-    cargs.append("-abin")
     cargs.extend([
         "-abin",
         afni_bin_dir

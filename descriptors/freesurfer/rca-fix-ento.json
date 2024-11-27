@@ -1,7 +1,7 @@
 {
   "name": "rca-fix-ento",
   "description": "A tool to fix the entorhinal white matter in FreeSurfer using a deep learning network.",
-  "command-line": "rca-fix-ento --s [SUBJECT] --threads [THREADS] [SUBMIT_FLAG] --account [ACCOUNT] [BRAIN_MASK_FLAG]",
+  "command-line": "rca-fix-ento -[SUBJECT] [THREADS] [SUBMIT] [ACCOUNT] [BRAIN_MASK]",
   "schema-version": "0.5",
   "inputs": [
     {
@@ -10,7 +10,8 @@
       "type": "String",
       "optional": false,
       "id": "subject",
-      "name": "Subject"
+      "name": "Subject",
+      "command-line-flag": "-s"
     },
     {
       "command-line-flag": "--threads",
@@ -24,7 +25,7 @@
     {
       "command-line-flag": "--submit",
       "description": "Submit the task to sbatch with 1 thread and 14GB of memory.",
-      "value-key": "[SUBMIT_FLAG]",
+      "value-key": "[SUBMIT]",
       "type": "Flag",
       "optional": true,
       "id": "submit",
@@ -42,7 +43,7 @@
     {
       "command-line-flag": "--brain-mask",
       "description": "Apply the ento fix to the brain.finalsurfs; this is turned off due to a conflict with 255.",
-      "value-key": "[BRAIN_MASK_FLAG]",
+      "value-key": "[BRAIN_MASK]",
       "type": "Flag",
       "optional": true,
       "id": "brain_mask",

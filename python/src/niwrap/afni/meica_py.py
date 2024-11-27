@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MEICA_PY_METADATA = Metadata(
-    id="5ae02d926937c9c63f30c373b905edbe3696ed5f.boutiques",
+    id="4f8853ae256f37ea17513108bcc3c27cb471dc45.boutiques",
     name="meica.py",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -61,14 +61,22 @@ def meica_py(
     execution = runner.start_execution(MEICA_PY_METADATA)
     cargs = []
     cargs.append("meica.py")
-    cargs.append("-d")
-    cargs.append(execution.input_file(infile))
-    cargs.append("-e")
-    cargs.append(echo_times)
-    cargs.append("-a")
-    cargs.append(affine)
-    cargs.append("-o")
-    cargs.append(output_directory)
+    cargs.extend([
+        "-d",
+        execution.input_file(infile)
+    ])
+    cargs.extend([
+        "-e",
+        echo_times
+    ])
+    cargs.extend([
+        "-a",
+        affine
+    ])
+    cargs.extend([
+        "-o",
+        output_directory
+    ])
     if components is not None:
         cargs.extend([
             "-c",

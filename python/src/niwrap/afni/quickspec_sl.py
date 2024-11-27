@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 QUICKSPEC_SL_METADATA = Metadata(
-    id="889040e44332ca29004fb5b3b94e878babda4bd4.boutiques",
+    id="25906cfa619866947e348b53b2e212694192bdac.boutiques",
     name="quickspecSL",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -20,7 +20,7 @@ class QuickspecSlOutputs(typing.NamedTuple):
     """
     root: OutputPathType
     """Output root folder. This is the root folder for all outputs."""
-    output_spec_file: OutputPathType | None
+    output_spec_file: OutputPathType
     """Output spec file"""
 
 
@@ -68,38 +68,36 @@ def quickspec_sl(
     execution = runner.start_execution(QUICKSPEC_SL_METADATA)
     cargs = []
     cargs.append("quickspecSL")
-    cargs.append("-surf_A")
-    cargs.append(execution.input_file(surf_a))
-    cargs.append("-surf_B")
-    cargs.append(execution.input_file(surf_b))
-    cargs.append("-surf_intermed_pref")
+    cargs.extend([
+        "-surf_A",
+        execution.input_file(surf_a)
+    ])
+    cargs.extend([
+        "-surf_B",
+        execution.input_file(surf_b)
+    ])
     if surf_intermed_pref is not None:
         cargs.extend([
             "-surf_intermed_pref",
             surf_intermed_pref
         ])
-    cargs.append("-infl_surf_A")
     if infl_surf_a is not None:
         cargs.extend([
             "-infl_surf_A",
             execution.input_file(infl_surf_a)
         ])
-    cargs.append("-infl_surf_B")
     if infl_surf_b is not None:
         cargs.extend([
             "-infl_surf_B",
             execution.input_file(infl_surf_b)
         ])
-    cargs.append("-infl_surf_intermed_pref")
     if infl_surf_intermed_pref is not None:
         cargs.extend([
             "-infl_surf_intermed_pref",
             infl_surf_intermed_pref
         ])
-    cargs.append("-both_lr")
     if both_lr_flag:
         cargs.append("-both_lr")
-    cargs.append("-out_spec")
     if out_spec is not None:
         cargs.extend([
             "-out_spec",
@@ -107,7 +105,7 @@ def quickspec_sl(
         ])
     ret = QuickspecSlOutputs(
         root=execution.output_file("."),
-        output_spec_file=execution.output_file(out_spec) if (out_spec is not None) else None,
+        output_spec_file=execution.output_file("[out_spec]"),
     )
     execution.run(cargs)
     return ret

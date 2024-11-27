@@ -1,6 +1,6 @@
 {
   "name": "antsCorticalThickness.sh",
-  "command-line": "antsCorticalThickness.sh -d [IMAGE_DIMENSION] -a [ANATOMICAL_IMAGE] -e [BRAIN_TEMPLATE] -m [BRAIN_EXTRACTION_PROBABILITY_MASK] -p [BRAIN_SEGMENTATION_PRIORS] [ADDITIONAL_PARAMETERS] -o [OUTPUT_PREFIX]",
+  "command-line": "antsCorticalThickness.sh [IMAGE_DIMENSION] [ANATOMICAL_IMAGE] [BRAIN_TEMPLATE] [BRAIN_EXTRACTION_PROBABILITY_MASK] [BRAIN_SEGMENTATION_PRIORS] [ADDITIONAL_PARAMETERS] [OUTPUT_PREFIX]",
   "author": "ANTs Developers",
   "description": "This script performs T1 anatomical brain processing including brain extraction, brain n-tissue segmentation, cortical thickness estimation, and optional registration to a template.",
   "url": "https://github.com/ANTsX/ANTs",

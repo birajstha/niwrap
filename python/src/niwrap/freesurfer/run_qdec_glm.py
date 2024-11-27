@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 RUN_QDEC_GLM_METADATA = Metadata(
-    id="a88ac0587f0f6fccb4e2e53192e6ac3ec7342484.boutiques",
+    id="b83d7c50b5137b0f5530f2c1776edefd9de98fa2.boutiques",
     name="run-qdec-glm",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -42,8 +42,10 @@ def run_qdec_glm(
     runner = runner or get_global_runner()
     execution = runner.start_execution(RUN_QDEC_GLM_METADATA)
     cargs = []
-    cargs.append("run-qdec-glm")
-    cargs.append(qdec_directory)
+    cargs.extend([
+        "-glm",
+        "run-qdec" + qdec_directory
+    ])
     ret = RunQdecGlmOutputs(
         root=execution.output_file("."),
     )

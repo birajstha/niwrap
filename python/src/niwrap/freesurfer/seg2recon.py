@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 SEG2RECON_METADATA = Metadata(
-    id="aa3e686587638c9d8c5430587e36b6edff11023f.boutiques",
+    id="d3b02cc1c7335494bf4689568b19e0fd4d4715aa.boutiques",
     name="seg2recon",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -80,22 +80,28 @@ def seg2recon(
     execution = runner.start_execution(SEG2RECON_METADATA)
     cargs = []
     cargs.append("seg2recon")
-    cargs.append("--s")
-    cargs.append(subject)
-    cargs.append("--seg")
-    cargs.append(execution.input_file(segvol))
-    cargs.append("--i")
-    cargs.append(execution.input_file(inputvol))
-    cargs.append("--ctab")
+    cargs.extend([
+        "-s",
+        "-" + subject
+    ])
+    cargs.extend([
+        "-seg",
+        "-" + execution.input_file(segvol)
+    ])
+    cargs.extend([
+        "-i",
+        "-" + execution.input_file(inputvol)
+    ])
     if ctab is not None:
-        cargs.append(execution.input_file(ctab))
-    cargs.append("--ndilate")
+        cargs.extend([
+            "-ctab",
+            "-" + execution.input_file(ctab)
+        ])
     if ndilate is not None:
         cargs.extend([
             "--ndilate",
             str(ndilate)
         ])
-    cargs.append("--threads")
     if threads is not None:
         cargs.extend([
             "--threads",
@@ -105,25 +111,21 @@ def seg2recon(
         cargs.append("--force-update")
     if no_cc:
         cargs.append("--no-cc")
-    cargs.append("--m")
     if mask is not None:
         cargs.extend([
             "--m",
             execution.input_file(mask)
         ])
-    cargs.append("--h")
     if headmask is not None:
         cargs.extend([
             "--h",
             execution.input_file(headmask)
         ])
-    cargs.append("--thresh")
     if thresh is not None:
         cargs.extend([
             "--thresh",
             str(thresh)
         ])
-    cargs.append("--expert")
     if expert is not None:
         cargs.extend([
             "--expert",

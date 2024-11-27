@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 DMRI_SPLINE_METADATA = Metadata(
-    id="af3dc29fc0f60175d085662514f5caef235f333d.boutiques",
+    id="031f36ae4b8f1357c1d4c23b4aa893bce0bf6260.boutiques",
     name="dmri_spline",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -22,7 +22,7 @@ class DmriSplineOutputs(typing.NamedTuple):
     """Output root folder. This is the root folder for all outputs."""
     out_volume: OutputPathType | None
     """Output volume of the interpolated spline"""
-    out_points_file: OutputPathType | None
+    out_points_file: OutputPathType
     """Output text file with interpolated spline points"""
     out_tangent_vectors: OutputPathType | None
     """Output text file containing tangent vectors"""
@@ -70,12 +70,10 @@ def dmri_spline(
     execution = runner.start_execution(DMRI_SPLINE_METADATA)
     cargs = []
     cargs.append("dmri_spline")
-    cargs.append("--cpts")
     cargs.extend([
         "--cpts",
         execution.input_file(control_points_file)
     ])
-    cargs.append("--mask")
     cargs.extend([
         "--mask",
         execution.input_file(mask_volume)
@@ -104,7 +102,7 @@ def dmri_spline(
     ret = DmriSplineOutputs(
         root=execution.output_file("."),
         out_volume=execution.output_file(pathlib.Path(output_volume).name) if (output_volume is not None) else None,
-        out_points_file=execution.output_file(pathlib.Path(output_points).name) if (output_points is not None) else None,
+        out_points_file=execution.output_file("[OUTPUT_POINTS_FILE]"),
         out_tangent_vectors=execution.output_file(output_vectors_base + "_tangent.txt") if (output_vectors_base is not None) else None,
         out_normal_vectors=execution.output_file(output_vectors_base + "_normal.txt") if (output_vectors_base is not None) else None,
         out_curvature=execution.output_file(output_vectors_base + "_curvature.txt") if (output_vectors_base is not None) else None,

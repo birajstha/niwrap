@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 RECON_ALL_EXVIVO_METADATA = Metadata(
-    id="8f4b36bf7950824e3a0ee98ffb8bc6adf2ff9572.boutiques",
+    id="ab8a5243b725eb3269bc328c28f826e76302edba.boutiques",
     name="recon-all-exvivo",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -47,8 +47,10 @@ def recon_all_exvivo(
     execution = runner.start_execution(RECON_ALL_EXVIVO_METADATA)
     cargs = []
     cargs.append("recon-all-exvivo")
-    cargs.append("-s")
-    cargs.append(subject_id)
+    cargs.extend([
+        "-s",
+        subject_id
+    ])
     if hemisphere is not None:
         cargs.extend([
             "-[lr]h",

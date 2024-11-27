@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 MAKE_CORTEX_LABEL_METADATA = Metadata(
-    id="bc9db42feeb6c156b6f40c957b8a6e6c8e3082e6.boutiques",
+    id="f144e3d1e0fdf022a6e2282c867ba8f46fafc1cb.boutiques",
     name="make_cortex_label",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -53,7 +53,6 @@ def make_cortex_label(
     execution = runner.start_execution(MAKE_CORTEX_LABEL_METADATA)
     cargs = []
     cargs.append("make_cortex_label")
-    cargs.append("--s")
     cargs.extend([
         "--s",
         subject
@@ -65,7 +64,6 @@ def make_cortex_label(
         ])
     if use_a2009s:
         cargs.append("--a2009s")
-    cargs.append("--o")
     if output_name is not None:
         cargs.extend([
             "--o",

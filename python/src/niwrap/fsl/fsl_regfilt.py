@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 FSL_REGFILT_METADATA = Metadata(
-    id="d42ece30af77a0e256ce772eb17817edd6dcec34.boutiques",
+    id="4735bf955b868dc5966c0bba37c734f92fcb1a7e.boutiques",
     name="fsl_regfilt",
     package="fsl",
     container_image_tag="brainlife/fsl:6.0.4-patched2",
@@ -90,12 +90,18 @@ def fsl_regfilt(
     execution = runner.start_execution(FSL_REGFILT_METADATA)
     cargs = []
     cargs.append("fsl_regfilt")
-    cargs.append("-i")
-    cargs.append(execution.input_file(infile))
-    cargs.append("-d")
-    cargs.append(execution.input_file(designfile))
-    cargs.append("-o")
-    cargs.append(outfile)
+    cargs.extend([
+        "-i",
+        execution.input_file(infile)
+    ])
+    cargs.extend([
+        "-d",
+        execution.input_file(designfile)
+    ])
+    cargs.extend([
+        "-o",
+        outfile
+    ])
     if maskfile is not None:
         cargs.extend([
             "-m",
@@ -150,7 +156,7 @@ def fsl_regfilt(
         ])
     ret = FslRegfiltOutputs(
         root=execution.output_file("."),
-        filtered_data=execution.output_file(outfile + ".nii.gz"),
+        filtered_data=execution.output_file("[OUTPUT_FILE].nii.gz"),
         preprocessed_data=execution.output_file(out_data + ".nii.gz") if (out_data is not None) else None,
         mixing_matrix=execution.output_file(out_mix + ".nii.gz") if (out_mix is not None) else None,
         vnscales=execution.output_file(out_vnscales + ".nii.gz") if (out_vnscales is not None) else None,

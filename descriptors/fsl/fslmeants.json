@@ -4,7 +4,7 @@
   "author": "FMRIB Analysis Group, University of Oxford",
   "description": "Prints average timeseries (intensities) to the screen (or saves to a file).",
   "url": "https://fsl.fmrib.ox.ac.uk/fsl/fslwiki",
-  "command-line": "fslmeants -i [INPUT_IMAGE] [OUTPUT] [MASK] [COORDINATES] [USEMM_FLAG] [SHOWALL_FLAG] [EIGENV_FLAG] [EIGENVARIATES_ORDER] [NO_BIN_FLAG] [LABEL_IMAGE] [TRANSPOSE_FLAG] [WEIGHTED_MEAN_FLAG] [VERBOSE_FLAG]",
+  "command-line": "fslmeants [INPUT_IMAGE] [OUTPUT] [MASK] [COORDINATES] [USEMM_FLAG] [SHOWALL_FLAG] [EIGENV_FLAG] [EIGENVARIATES_ORDER] [NO_BIN_FLAG] [LABEL_IMAGE] [TRANSPOSE_FLAG] [WEIGHTED_MEAN_FLAG] [VERBOSE_FLAG]",
   "container-image": {
     "type": "docker",
     "image": "brainlife/fsl:6.0.4-patched2"
@@ -123,7 +123,7 @@
     },
     {
       "description": "Display the help message",
-      "value-key": "help_flag",
+      "value-key": "[HELP_FLAG]",
       "type": "Flag",
       "optional": true,
       "id": "help_flag",

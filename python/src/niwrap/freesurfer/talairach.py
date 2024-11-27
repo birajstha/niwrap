@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 TALAIRACH_METADATA = Metadata(
-    id="1d639602e635b0e4a48adfe1d826d77d183c073e.boutiques",
+    id="52517cf7cb69f88891a3bcdcf2cd123a5a05e510.boutiques",
     name="talairach",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -52,17 +52,21 @@ def talairach(
     execution = runner.start_execution(TALAIRACH_METADATA)
     cargs = []
     cargs.append("mri_nu_correct.mni")
-    cargs.append("--i")
-    cargs.append(execution.input_file(input_volume))
-    cargs.append("--xfm")
-    cargs.append(output_transform)
+    cargs.extend([
+        "-i",
+        "-" + execution.input_file(input_volume)
+    ])
+    cargs.extend([
+        "-xfm",
+        "-" + output_transform
+    ])
     if log_flag:
         cargs.append("--log")
     if debug_flag:
         cargs.append("--debug")
     ret = TalairachOutputs(
         root=execution.output_file("."),
-        xfm_output=execution.output_file(output_transform),
+        xfm_output=execution.output_file("[OUTPUT_XFM]"),
     )
     execution.run(cargs)
     return ret

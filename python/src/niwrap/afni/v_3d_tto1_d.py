@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V_3D_TTO1_D_METADATA = Metadata(
-    id="cad19c8c36d58b1690c78ef0d6c215e09c7e7cce.boutiques",
+    id="c4536089d729353b2214d75b62553c23db962d0e.boutiques",
     name="3dTto1D",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -59,9 +59,10 @@ def v_3d_tto1_d(
     execution = runner.start_execution(V_3D_TTO1_D_METADATA)
     cargs = []
     cargs.append("3dTto1D")
-    cargs.append("-input")
-    cargs.append(execution.input_file(input_dataset))
-    cargs.append("-method")
+    cargs.extend([
+        "-input",
+        execution.input_file(input_dataset)
+    ])
     cargs.extend([
         "-method",
         method

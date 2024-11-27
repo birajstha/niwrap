@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V__ROI_MODAL_GROW_METADATA = Metadata(
-    id="e8f66331d7e1f46be263001d8f84462116ac0792.boutiques",
+    id="a717544c0515cdd54f72389e876ae926a35bce90.boutiques",
     name="@ROI_modal_grow",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -20,7 +20,7 @@ class VRoiModalGrowOutputs(typing.NamedTuple):
     """
     root: OutputPathType
     """Output root folder. This is the root folder for all outputs."""
-    output_file: OutputPathType | None
+    output_file: OutputPathType
     """Final output dataset"""
 
 
@@ -64,35 +64,29 @@ def v__roi_modal_grow(
     execution = runner.start_execution(V__ROI_MODAL_GROW_METADATA)
     cargs = []
     cargs.append("@ROI_modal_grow")
-    cargs.append("-input")
     cargs.extend([
         "-input",
         execution.input_file(input_dset)
     ])
-    cargs.append("-niters")
     cargs.extend([
         "-niters",
         str(niters)
     ])
-    cargs.append("-outdir")
     if outdir is not None:
         cargs.extend([
             "-outdir",
             outdir
         ])
-    cargs.append("-mask")
     if mask is not None:
         cargs.extend([
             "-mask",
             execution.input_file(mask)
         ])
-    cargs.append("-prefix")
     if prefix is not None:
         cargs.extend([
             "-prefix",
             prefix
         ])
-    cargs.append("-NN")
     if neighborhood_type is not None:
         cargs.extend([
             "-NN",
@@ -100,7 +94,7 @@ def v__roi_modal_grow(
         ])
     ret = VRoiModalGrowOutputs(
         root=execution.output_file("."),
-        output_file=execution.output_file(outdir + "/" + prefix + ".nii.gz") if (outdir is not None and prefix is not None) else None,
+        output_file=execution.output_file("[OUTPUT_DIR]/[OUTPUT_PREFIX].nii.gz"),
     )
     execution.run(cargs)
     return ret

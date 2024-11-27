@@ -4,7 +4,7 @@
   "author": "NiftyReg Developers",
   "description": "Fast Free-Form Deformation algorithm for non-rigid registration based on Rueckert's 99 TMI work.",
   "url": "http://cmictig.cs.ucl.ac.uk/wiki/index.php/NiftyReg",
-  "command-line": "reg_f3d -ref [REFERENCE_IMAGE] -flo [FLOATING_IMAGE] [OPTIONS]",
+  "command-line": "reg_f3d [REFERENCE_IMAGE] [FLOATING_IMAGE] [OPTIONS]",
   "schema-version": "0.5",
   "inputs": [
     {
@@ -101,7 +101,7 @@
       "id": "num_bins_joint_histogram",
       "name": "Number of Bins for Joint Histogram",
       "type": "Number",
-      "value-key": "[NUM_BINS]",
+      "value-key": "[NUM_BINS_JOINT_HISTOGRAM]",
       "command-line-flag": "--rbn",
       "description": "Number of bins to use for the joint histogram (reference)",
       "optional": true
@@ -110,7 +110,7 @@
       "id": "num_bins_floating_joint_histogram",
       "name": "Number of Bins for Floating Joint Histogram",
       "type": "Number",
-      "value-key": "[NUM_BINS_FLOAT]",
+      "value-key": "[NUM_BINS_FLOATING_JOINT_HISTOGRAM]",
       "command-line-flag": "--fbn",
       "description": "Number of bins to use for the joint histogram (floating)",
       "optional": true

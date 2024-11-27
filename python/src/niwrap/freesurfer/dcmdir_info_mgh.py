@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 DCMDIR_INFO_MGH_METADATA = Metadata(
-    id="8a135eb2c424e8fca3c65b45cb1c892c036acc1e.boutiques",
+    id="7ccff8790fdd0d584c57e3c31a9bf9ffd1e90e36.boutiques",
     name="dcmdir-info-mgh",
     package="freesurfer",
     container_image_tag="freesurfer/freesurfer:7.4.1",
@@ -54,8 +54,10 @@ def dcmdir_info_mgh(
     runner = runner or get_global_runner()
     execution = runner.start_execution(DCMDIR_INFO_MGH_METADATA)
     cargs = []
-    cargs.append("dcmdir-info-mgh")
-    cargs.append(dicomdir)
+    cargs.extend([
+        "-mgh",
+        "dcmdir-info" + dicomdir
+    ])
     if unpackdir is not None:
         cargs.append(unpackdir)
     if version:

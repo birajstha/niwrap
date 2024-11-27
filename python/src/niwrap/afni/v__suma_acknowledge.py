@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V__SUMA_ACKNOWLEDGE_METADATA = Metadata(
-    id="d037b40d3b42a963ac007ed6a05e2db450974d09.boutiques",
+    id="a8f4715fa5105c4c0609bd564b7d507bb058f088.boutiques",
     name="@suma_acknowledge",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -62,12 +62,18 @@ def v__suma_acknowledge(
     execution = runner.start_execution(V__SUMA_ACKNOWLEDGE_METADATA)
     cargs = []
     cargs.append("@suma_acknowledge")
-    cargs.append("-input")
-    cargs.append(execution.input_file(input_file))
-    cargs.append("-surf")
-    cargs.append(execution.input_file(surface_file))
-    cargs.append("-prefix")
-    cargs.append(output_prefix)
+    cargs.extend([
+        "-input",
+        execution.input_file(input_file)
+    ])
+    cargs.extend([
+        "-surf",
+        execution.input_file(surface_file)
+    ])
+    cargs.extend([
+        "-prefix",
+        output_prefix
+    ])
     if center_flag:
         cargs.append("-center")
     if subsurface_file is not None:

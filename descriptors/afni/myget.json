@@ -2,7 +2,7 @@
   "tool-version": "24.2.06",
   "name": "myget",
   "description": "A simple file downloader from a URL",
-  "command-line": "myget [PROTOCOL_VERSION] [URL]",
+  "command-line": "myget[PROTOCOL_VERSION][URL]",
   "inputs": [
     {
       "id": "protocol_version",

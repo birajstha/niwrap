@@ -7,7 +7,7 @@ from styxdefs import *
 import dataclasses
 
 V_3D_SEG_METADATA = Metadata(
-    id="3bd6f94c8da11d9b229d06d9fdc731915ae9d41f.boutiques",
+    id="f6e7c61caa09a93af688039024093f43ff4f67a3.boutiques",
     name="3dSeg",
     package="afni",
     container_image_tag="afni/afni_make_build:AFNI_24.2.06",
@@ -96,105 +96,92 @@ def v_3d_seg(
     execution = runner.start_execution(V_3D_SEG_METADATA)
     cargs = []
     cargs.append("3dSeg")
-    cargs.append("-anat")
-    cargs.append(execution.input_file(anat))
-    cargs.append("-mask")
+    cargs.extend([
+        "-anat",
+        execution.input_file(anat)
+    ])
     if mask is not None:
-        cargs.append(mask)
-    cargs.append("-blur_meth")
+        cargs.extend([
+            "-mask",
+            mask
+        ])
     if blur_meth is not None:
         cargs.extend([
             "-blur_meth",
             blur_meth
         ])
-    cargs.append("-bias_fwhm")
     if bias_fwhm is not None:
         cargs.extend([
             "-bias_fwhm",
             str(bias_fwhm)
         ])
-    cargs.append("-classes")
     if classes is not None:
         cargs.extend([
             "-classes",
             classes
         ])
-    cargs.append("-Bmrf")
     if bmrf is not None:
         cargs.extend([
             "-Bmrf",
             str(bmrf)
         ])
-    cargs.append("-bias_classes")
     if bias_classes is not None:
         cargs.extend([
             "-bias_classes",
             bias_classes
         ])
-    cargs.append("-prefix")
     if prefix is not None:
         cargs.extend([
             "-prefix",
             prefix
         ])
-    cargs.append("-overwrite")
     if overwrite:
         cargs.append("-overwrite")
-    cargs.append("-debug")
     if debug is not None:
         cargs.extend([
             "-debug",
             str(debug)
         ])
-    cargs.append("-mixfrac")
     if mixfrac is not None:
         cargs.extend([
             "-mixfrac",
             mixfrac
         ])
-    cargs.append("-mixfloor")
     if mixfloor is not None:
         cargs.extend([
             "-mixfloor",
             str(mixfloor)
         ])
-    cargs.append("-gold")
     if gold is not None:
         cargs.extend([
             "-gold",
             execution.input_file(gold)
         ])
-    cargs.append("-gold_bias")
     if gold_bias is not None:
         cargs.extend([
             "-gold_bias",
             execution.input_file(gold_bias)
         ])
-    cargs.append("-main_N")
     if main_n is not None:
         cargs.extend([
             "-main_N",
             str(main_n)
         ])
-    cargs.append("-cset")
     if cset is not None:
         cargs.extend([
             "-cset",
             execution.input_file(cset)
         ])
-    cargs.append("-labeltable")
     if labeltable is not None:
         cargs.extend([
             "-labeltable",
             execution.input_file(labeltable)
         ])
-    cargs.append("-vox_debug")
     if vox_debug is not None:
         cargs.extend([
             "-vox_debug",
             vox_debug
         ])
-    cargs.append("-vox_debug_file")
     if vox_debug_file is not None:
         cargs.extend([
             "-vox_debug_file",
